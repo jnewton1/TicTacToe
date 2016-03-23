@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 import java.util.Scanner;
+import javax.swing.*;
 
 /**
 * Tic-Tac-Toe: Two-player Graphics version with Simple-OO
@@ -10,25 +10,25 @@ import java.util.Scanner;
 * @Contributors: Edwin Benitez
 */
 
- 
 @SuppressWarnings("serial")
 public class TTTGraphics2P extends JFrame {
+	 public static int r;
+	 public static int w;
    // Named-constants for the game board
-   public int ROWS = 3;  // ROWS by COLS cells
-   public int COLS = 3;
+   public  int ROWS = r;  // ROWS by COLS cells
+   public  int COLS = r;
  
    // Named-constants of the various dimensions used for graphics drawing
-   public int CELL_SIZE = 100; // cell width and height (square)
-   public int CANVAS_WIDTH = CELL_SIZE * COLS;  // the drawing canvas
-   public int CANVAS_HEIGHT = CELL_SIZE * ROWS;
-   public int GRID_WIDTH = 8;                   // Grid-line's width
+   public  int CELL_SIZE = 100; // cell width and height (square)
+   public  int CANVAS_WIDTH = CELL_SIZE * COLS;  // the drawing canvas
+   public  int CANVAS_HEIGHT = CELL_SIZE * ROWS;
+   public  int GRID_WIDTH = 8;                   // Grid-line's width
    public int GRID_WIDHT_HALF = GRID_WIDTH / 2; // Grid-line's half-width
-   
    // Symbols (cross/nought) are displayed inside a cell, with padding from border
    public int CELL_PADDING = CELL_SIZE / 6;
    public int SYMBOL_SIZE = CELL_SIZE - CELL_PADDING * 2; // width/height
    public int SYMBOL_STROKE_WIDTH = 8; // pen's stroke width
-
+ 
    // Use an enumeration (inner class) to represent the various states of the game
    public enum GameState {
       PLAYING, DRAW, CROSS_WON, NOUGHT_WON
@@ -40,13 +40,11 @@ public class TTTGraphics2P extends JFrame {
       EMPTY, CROSS, NOUGHT
    }
    private Seed currentPlayer;  // the current player
-   
  
    private Seed[][] board   ; // Game board of ROWS-by-COLS cells
    private DrawCanvas canvas; // Drawing canvas (JPanel) for the game board
    private JLabel statusBar;  // Status Bar
-   
-
+ 
    /** Constructor to setup the game and the GUI components */
    public TTTGraphics2P() {
       canvas = new DrawCanvas();  // Construct a drawing canvas (a JPanel)
@@ -134,6 +132,7 @@ public class TTTGraphics2P extends JFrame {
    /** Return true if the player with "theSeed" has won after placing at
        (rowSelected, colSelected) */
    public boolean hasWon(Seed theSeed, int rowSelected, int colSelected) {
+	   if (w == 3 && r==3){
       return (board[rowSelected][0] == theSeed  // 3-in-the-row
             && board[rowSelected][1] == theSeed
             && board[rowSelected][2] == theSeed
@@ -148,6 +147,480 @@ public class TTTGraphics2P extends JFrame {
             && board[0][2] == theSeed
             && board[1][1] == theSeed
             && board[2][0] == theSeed);
+	   }
+	   
+	   else if (w ==3 && r==4){
+		   //for board 4x4
+		      return (board[rowSelected][0] == theSeed  // 3-in-the-row
+		            && board[rowSelected][1] == theSeed
+		            && board[rowSelected][2] == theSeed
+		       || board[0][colSelected] == theSeed      // 3-in-the-column
+		            && board[1][colSelected] == theSeed
+		            && board[2][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[0][0] == theSeed
+		            && board[1][1] == theSeed
+		            && board[2][2] == theSeed
+		            
+		       || board[rowSelected][1] == theSeed  // 3-in-the-row
+		            && board[rowSelected][2] == theSeed
+		            && board[rowSelected][3] == theSeed
+		       || board[1][colSelected] == theSeed      // 3-in-the-column
+		            && board[2][colSelected] == theSeed
+		            && board[3][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[1][1] == theSeed
+		            && board[2][2] == theSeed
+		            && board[3][3] == theSeed
+		       || rowSelected + colSelected == 3  // 3-in-the-opposite-diagonal
+		            && board[1][2] == theSeed
+		            && board[2][1] == theSeed
+		            && board[3][0] == theSeed
+		       || rowSelected + colSelected == 3  // 3-in-the-opposite-diagonal
+		            && board[0][3] == theSeed
+		            && board[1][2] == theSeed
+		            && board[2][1] == theSeed
+			   || rowSelected + colSelected == 2 // 3-in-the-opposite-diagonal
+			            && board[0][2] == theSeed
+			            && board[1][1] == theSeed
+			            && board[2][0] == theSeed);
+			   }
+	   
+	   else if (w == 3 && r==5){
+		   //for board 5x5
+		      return (board[rowSelected][0] == theSeed  // 3-in-the-row
+		            && board[rowSelected][1] == theSeed
+		            && board[rowSelected][2] == theSeed
+		       || board[0][colSelected] == theSeed      // 3-in-the-column
+		            && board[1][colSelected] == theSeed
+		            && board[2][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[0][0] == theSeed
+		            && board[1][1] == theSeed
+		            && board[2][2] == theSeed
+		            
+		            
+		       || board[rowSelected][1] == theSeed  // 3-in-the-row
+		            && board[rowSelected][2] == theSeed
+		            && board[rowSelected][3] == theSeed
+		       || board[1][colSelected] == theSeed      // 3-in-the-column
+		            && board[2][colSelected] == theSeed
+		            && board[3][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[1][1] == theSeed
+		            && board[2][2] == theSeed
+		            && board[3][3] == theSeed
+		           
+		            
+		       || board[rowSelected][2] == theSeed  // 3-in-the-row
+		            && board[rowSelected][3] == theSeed
+		            && board[rowSelected][4] == theSeed
+		       || board[2][colSelected] == theSeed      // 3-in-the-column
+		            && board[3][colSelected] == theSeed
+		            && board[4][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[2][2] == theSeed
+		            && board[3][3] == theSeed
+		            && board[4][4] == theSeed
+		       || rowSelected + colSelected == 6  // 3-in-the-opposite-diagonal
+		            && board[2][4] == theSeed
+		            && board[3][3] == theSeed
+		            && board[4][2] == theSeed
+		       || rowSelected + colSelected == 5  // 3-in-the-opposite-diagonal
+		            && board[1][4] == theSeed
+		            && board[3][2] == theSeed
+		            && board[2][3] == theSeed
+		       || rowSelected + colSelected == 5  // 3-in-the-opposite-diagonal
+		            && board[4][1] == theSeed
+		            && board[3][2] == theSeed
+		            && board[2][3] == theSeed
+		        || rowSelected + colSelected == 4  // 3-in-the-opposite-diagonal
+		            && board[4][0] == theSeed
+		            && board[3][1] == theSeed
+		            && board[2][2] == theSeed
+		        || rowSelected + colSelected == 4  // 3-in-the-opposite-diagonal
+		            && board[0][4] == theSeed
+		            && board[1][3] == theSeed
+		            && board[2][2] == theSeed
+				|| rowSelected + colSelected == 4  // 3-in-the-opposite-diagonal
+			            && board[1][3] == theSeed
+			            && board[2][2] == theSeed
+			            && board[3][1] == theSeed
+			    || rowSelected + colSelected == 3  // 3-in-the-opposite-diagonal
+					    && board[0][3] == theSeed
+					    && board[1][2] == theSeed
+					    && board[2][1] == theSeed
+			    || rowSelected + colSelected == 2  // 3-in-the-opposite-diagonal
+				            && board[0][2] == theSeed
+				            && board[1][1] == theSeed
+				            && board[2][0] == theSeed);
+			   }
+	   if (w == 3 && r==6){
+		   //for board 6x6
+		      return (board[rowSelected][0] == theSeed  // 3-in-the-row
+		            && board[rowSelected][1] == theSeed
+		            && board[rowSelected][2] == theSeed
+		       || board[0][colSelected] == theSeed      // 3-in-the-column
+		            && board[1][colSelected] == theSeed
+		            && board[2][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[0][0] == theSeed
+		            && board[1][1] == theSeed
+		            && board[2][2] == theSeed
+
+		            
+		            
+		       || board[rowSelected][1] == theSeed  // 3-in-the-row
+		            && board[rowSelected][2] == theSeed
+		            && board[rowSelected][3] == theSeed
+		       || board[1][colSelected] == theSeed      // 3-in-the-column
+		            && board[2][colSelected] == theSeed
+		            && board[3][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[1][1] == theSeed
+		            && board[2][2] == theSeed
+		            && board[3][3] == theSeed
+
+		           
+		            
+		       || board[rowSelected][2] == theSeed  // 3-in-the-row
+		            && board[rowSelected][3] == theSeed
+		            && board[rowSelected][4] == theSeed
+		       || board[2][colSelected] == theSeed      // 3-in-the-column
+		            && board[3][colSelected] == theSeed
+		            && board[4][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[2][2] == theSeed
+		            && board[3][3] == theSeed
+		            && board[4][4] == theSeed
+
+		            
+		    		  
+		       || board[rowSelected][3] == theSeed  // 3-in-the-row
+		            && board[rowSelected][4] == theSeed
+		            && board[rowSelected][5] == theSeed
+		       || board[3][colSelected] == theSeed      // 3-in-the-column
+		            && board[4][colSelected] == theSeed
+		            && board[5][colSelected] == theSeed
+		       || rowSelected == colSelected            // 3-in-the-diagonal
+		            && board[3][3] == theSeed
+		            && board[4][4] == theSeed
+		            && board[5][5] == theSeed
+		     		       || rowSelected + colSelected == 6  // 3-in-the-opposite-diagonal
+				            && board[2][4] == theSeed
+				            && board[3][3] == theSeed
+				            && board[4][2] == theSeed
+				       || rowSelected + colSelected == 5  // 3-in-the-opposite-diagonal
+				            && board[1][4] == theSeed
+				            && board[3][2] == theSeed
+				            && board[2][3] == theSeed
+				       || rowSelected + colSelected == 5  // 3-in-the-opposite-diagonal
+				            && board[4][1] == theSeed
+				            && board[3][2] == theSeed
+				            && board[2][3] == theSeed
+				        || rowSelected + colSelected == 4  // 3-in-the-opposite-diagonal
+				            && board[4][0] == theSeed
+				            && board[3][1] == theSeed
+				            && board[2][2] == theSeed
+				        || rowSelected + colSelected == 4  // 3-in-the-opposite-diagonal
+				            && board[0][4] == theSeed
+				            && board[1][3] == theSeed
+				            && board[2][2] == theSeed
+						|| rowSelected + colSelected == 4  // 3-in-the-opposite-diagonal
+					            && board[1][3] == theSeed
+					            && board[2][2] == theSeed
+					            && board[3][1] == theSeed
+					    || rowSelected + colSelected == 3  // 3-in-the-opposite-diagonal
+							    && board[0][3] == theSeed
+							    && board[1][2] == theSeed
+							    && board[2][1] == theSeed
+					    || rowSelected + colSelected == 2  // 3-in-the-opposite-diagonal
+						            && board[0][2] == theSeed
+						            && board[1][1] == theSeed
+						            && board[2][0] == theSeed
+						|| rowSelected + colSelected == 5  // 3-in-the-opposite-diagonal
+						            && board[0][5] == theSeed
+						            && board[1][4] == theSeed
+						            && board[2][3] == theSeed
+						|| rowSelected + colSelected == 5  // 3-in-the-opposite-diagonal
+						            && board[5][0] == theSeed
+						            && board[4][1] == theSeed
+						            && board[3][2] == theSeed);
+			   }
+	   
+	   else if(w==4 && r==4)
+	   {
+		   //for board 4x4
+	return (board[rowSelected][0] == theSeed  // 4-in-the-row
+       && board[rowSelected][1] == theSeed
+       && board[rowSelected][2] == theSeed
+       && board[rowSelected][3] == theSeed
+  || board[0][colSelected] == theSeed      // 4-in-the-column
+       && board[1][colSelected] == theSeed
+       && board[2][colSelected] == theSeed
+       && board[3][colSelected] == theSeed
+  || rowSelected == colSelected            // 4-in-the-diagonal
+       && board[0][0] == theSeed
+       && board[1][1] == theSeed
+       && board[2][2] == theSeed
+       && board[3][3]== theSeed
+  || rowSelected + colSelected == 3   // 4-in-the-opposite-diagonal
+       && board[0][3] == theSeed
+       && board[1][2] == theSeed
+       && board[2][1] == theSeed
+       && board[3][0]== theSeed);
+	}
+	   
+	   else if(w==4 && r==5)
+	   {
+		   //for board 5x5
+	return (board[rowSelected][0] == theSeed  // 4-in-the-row
+       && board[rowSelected][1] == theSeed
+       && board[rowSelected][2] == theSeed
+       && board[rowSelected][3] == theSeed
+  || board[0][colSelected] == theSeed      // 4-in-the-column
+       && board[1][colSelected] == theSeed
+       && board[2][colSelected] == theSeed
+       && board[3][colSelected] == theSeed
+  || rowSelected == colSelected            // 4-in-the-diagonal
+       && board[0][0] == theSeed
+       && board[1][1] == theSeed
+       && board[2][2] == theSeed
+       && board[3][3]== theSeed
+
+       
+  || board[rowSelected][1] == theSeed  // 4-in-the-row
+       && board[rowSelected][2] == theSeed
+       && board[rowSelected][3] == theSeed
+       && board[rowSelected][4] == theSeed
+  || board[1][colSelected] == theSeed      // 4-in-the-column
+       && board[2][colSelected] == theSeed
+       && board[3][colSelected] == theSeed
+       && board[4][colSelected] == theSeed
+  || rowSelected == colSelected            // 4-in-the-diagonal
+       && board[1][1] == theSeed
+       && board[2][2] == theSeed
+       && board[3][3] == theSeed
+       && board[4][4]== theSeed
+  || rowSelected + colSelected == 5  // 4-in-the-opposite-diagonal
+       && board[1][4] == theSeed
+       && board[2][3] == theSeed
+       && board[3][2] == theSeed
+       && board[4][1]== theSeed
+  || rowSelected + colSelected == 3   // 4-in-the-opposite-diagonal
+       && board[0][3] == theSeed
+       && board[1][2] == theSeed
+       && board[2][1] == theSeed
+       && board[3][0]== theSeed
+  || rowSelected + colSelected == 4   // 4-in-the-opposite-diagonal
+       && board[0][4] == theSeed
+       && board[1][3] == theSeed
+       && board[2][2] == theSeed
+       && board[3][1]== theSeed
+  || rowSelected + colSelected == 4   // 4-in-the-opposite-diagonal
+       && board[4][0] == theSeed
+       && board[3][1] == theSeed
+       && board[2][2] == theSeed
+       && board[1][3]== theSeed);
+	   }
+	   
+	   else if(w==4 && r==6)
+	   {
+		   //for board 6x6
+	return (board[rowSelected][0] == theSeed  // 4-in-the-row
+       && board[rowSelected][1] == theSeed
+       && board[rowSelected][2] == theSeed
+       && board[rowSelected][3] == theSeed
+  || board[0][colSelected] == theSeed      // 4-in-the-column
+       && board[1][colSelected] == theSeed
+       && board[2][colSelected] == theSeed
+       && board[3][colSelected] == theSeed
+  || rowSelected == colSelected            // 4-in-the-diagonal
+       && board[0][0] == theSeed
+       && board[1][1] == theSeed
+       && board[2][2] == theSeed
+       && board[3][3]== theSeed
+
+       
+			
+  || board[rowSelected][1] == theSeed  // 4-in-the-row
+       && board[rowSelected][2] == theSeed
+       && board[rowSelected][3] == theSeed
+       && board[rowSelected][4] == theSeed
+  || board[1][colSelected] == theSeed      // 4-in-the-column
+       && board[2][colSelected] == theSeed
+       && board[3][colSelected] == theSeed
+       && board[4][colSelected] == theSeed
+  || rowSelected == colSelected            // 4-in-the-diagonal
+       && board[1][1] == theSeed
+       && board[2][2] == theSeed
+       && board[3][3] == theSeed
+       && board[4][4]== theSeed
+
+       
+			
+  || board[rowSelected][2] == theSeed  // 4-in-the-row
+       && board[rowSelected][3] == theSeed
+       && board[rowSelected][4] == theSeed
+       && board[rowSelected][5] == theSeed
+  || board[2][colSelected] == theSeed      // 4-in-the-column
+       && board[3][colSelected] == theSeed
+       && board[4][colSelected] == theSeed
+       && board[5][colSelected] == theSeed
+  || rowSelected == colSelected            // 4-in-the-diagonal
+       && board[2][2] == theSeed
+       && board[3][3] == theSeed
+       && board[4][4] == theSeed
+       && board[5][5]== theSeed
+  || rowSelected + colSelected == 7   // 4-in-the-opposite-diagonal
+       && board[2][5] == theSeed
+       && board[3][4] == theSeed
+       && board[4][3] == theSeed
+       && board[5][2]== theSeed
+  || rowSelected + colSelected == 3   // 4-in-the-opposite-diagonal
+       && board[0][3] == theSeed
+       && board[1][2] == theSeed
+       && board[2][1] == theSeed
+       && board[3][0]== theSeed
+  || rowSelected + colSelected == 5  // 4-in-the-opposite-diagonal
+       && board[1][4] == theSeed
+       && board[2][3] == theSeed
+       && board[3][2] == theSeed
+       && board[4][1]== theSeed
+  || rowSelected + colSelected == 5  // 4-in-the-opposite-diagonal
+       && board[0][5] == theSeed
+       && board[1][4] == theSeed
+       && board[2][3] == theSeed
+       && board[3][2]== theSeed
+  || rowSelected + colSelected == 5  // 4-in-the-opposite-diagonal
+       && board[5][0] == theSeed
+       && board[4][1] == theSeed
+       && board[3][2] == theSeed
+       && board[2][3]== theSeed);
+	   }
+	   
+	   else if(w==5 && r==5)
+	   {
+	return (board[rowSelected][0] == theSeed  // 5-in-the-row
+		&& board[rowSelected][1] == theSeed
+		&& board[rowSelected][2] == theSeed
+		&& board[rowSelected][3] == theSeed
+		&& board[rowSelected][4] == theSeed
+	|| board[0][colSelected] == theSeed      // 5-in-the-column
+		&& board[1][colSelected] == theSeed
+		&& board[2][colSelected] == theSeed
+		&& board[3][colSelected] == theSeed
+		&& board[4][colSelected] == theSeed
+	|| rowSelected == colSelected            // 5-in-the-diagonal
+		&& board[0][0] == theSeed
+		&& board[1][1] == theSeed
+		&& board[2][2] == theSeed
+		&& board[3][3]== theSeed
+		&& board[4][4]== theSeed
+	|| rowSelected + colSelected == 4   // 5-in-the-opposite-diagonal
+		&& board[0][4] == theSeed
+		&& board[1][3] == theSeed
+		&& board[2][2] == theSeed
+		&& board[3][1]== theSeed
+		&& board[4][0]== theSeed); 
+	   }
+	   
+	   else if(w==5 && r==6)
+	   {
+		   //for board 6x6
+	return (board[rowSelected][0] == theSeed  // 5-in-the-row
+		&& board[rowSelected][1] == theSeed
+		&& board[rowSelected][2] == theSeed
+		&& board[rowSelected][3] == theSeed
+		&& board[rowSelected][4] == theSeed
+	|| board[0][colSelected] == theSeed      // 5-in-the-column
+		&& board[1][colSelected] == theSeed
+		&& board[2][colSelected] == theSeed
+		&& board[3][colSelected] == theSeed
+		&& board[4][colSelected] == theSeed
+	|| rowSelected == colSelected            // 5-in-the-diagonal
+		&& board[0][0] == theSeed
+		&& board[1][1] == theSeed
+		&& board[2][2] == theSeed
+		&& board[3][3]== theSeed
+		&& board[4][4]== theSeed
+
+			
+	|| board[rowSelected][1] == theSeed  // 5-in-the-row
+		&& board[rowSelected][2] == theSeed
+		&& board[rowSelected][3] == theSeed
+		&& board[rowSelected][4] == theSeed
+		&& board[rowSelected][5] == theSeed
+	|| board[1][colSelected] == theSeed      // 5-in-the-column
+		&& board[2][colSelected] == theSeed
+		&& board[3][colSelected] == theSeed
+		&& board[4][colSelected] == theSeed
+		&& board[5][colSelected] == theSeed
+	|| rowSelected == colSelected            // 5-in-the-diagonal
+		&& board[1][1] == theSeed
+		&& board[2][2] == theSeed
+		&& board[3][3] == theSeed
+		&& board[4][4]== theSeed
+		&& board[5][5]== theSeed
+	|| rowSelected + colSelected == 6   // 5-in-the-opposite-diagonal
+		&& board[1][5] == theSeed
+		&& board[2][4] == theSeed
+		&& board[3][3] == theSeed
+		&& board[4][2]== theSeed
+		&& board[5][1]== theSeed
+	|| rowSelected + colSelected == 5   // 5-in-the-opposite-diagonal
+		&& board[0][5] == theSeed
+		&& board[1][4] == theSeed
+		&& board[2][3] == theSeed
+		&& board[3][2]== theSeed
+		&& board[4][1]== theSeed
+    || rowSelected + colSelected == 4   // 5-in-the-opposite-diagonal
+		&& board[0][4] == theSeed
+		&& board[1][3] == theSeed
+		&& board[2][2] == theSeed
+		&& board[3][1]== theSeed
+		&& board[4][0]== theSeed
+    || rowSelected + colSelected == 5   // 5-in-the-opposite-diagonal
+		&& board[5][0] == theSeed
+		&& board[4][1] == theSeed
+		&& board[3][2] == theSeed
+		&& board[2][3]== theSeed
+		&& board[1][4]== theSeed); 
+	   }
+	   
+	   
+	   else if(w==6 && r==6){
+		   //for board 6x6
+	return (board[rowSelected][0] == theSeed  // 6-in-the-row
+		&& board[rowSelected][1] == theSeed
+		&& board[rowSelected][2] == theSeed
+		&& board[rowSelected][3] == theSeed
+		&& board[rowSelected][4] == theSeed
+		&& board[rowSelected][5] == theSeed
+	|| board[0][colSelected] == theSeed      // 6-in-the-column
+		&& board[1][colSelected] == theSeed
+		&& board[2][colSelected] == theSeed
+		&& board[3][colSelected] == theSeed
+		&& board[4][colSelected] == theSeed
+		&& board[5][colSelected] == theSeed
+	|| rowSelected == colSelected            // 6-in-the-diagonal
+		&& board[0][0] == theSeed
+		&& board[1][1] == theSeed
+		&& board[2][2] == theSeed
+		&& board[3][3]== theSeed
+		&& board[4][4]== theSeed
+		&& board[5][5]== theSeed
+	|| rowSelected + colSelected == 5   // 6-in-the-opposite-diagonal
+		&& board[0][5] == theSeed
+		&& board[1][4] == theSeed
+		&& board[2][3] == theSeed
+		&& board[3][2]== theSeed
+		&& board[4][1]== theSeed
+		&& board[5][0]== theSeed);
+	   }
+
+	   
+	return rootPaneCheckingEnabled;
    }
  
    /**
@@ -214,18 +687,17 @@ public class TTTGraphics2P extends JFrame {
    }
  
    /** The entry main() method */
-   /**Scanner prompt user to set constraints*/
    public static void main(String[] args) {
-      Scanner input = new Scanner(System.in);
-            System.out.println("Enter the desired size of the board.");
-            String boardsize = input.nextLine();
-            
-            System.out.println("Enter the number of winning pieces.");
-            String piecenum = input.nextLine();
-      
-      
+	   Scanner sc = new Scanner(System.in);
+  	   System.out.println("Enter the size of the board (3-6): ");
+         r = sc.nextInt();
+         Scanner wc = new Scanner(System.in);
+         System.out.println("Enter numbers for winning (3-6): ");
+         w = wc.nextInt();
+	  
       // Run GUI codes in the Event-Dispatching thread for thread safety
       SwingUtilities.invokeLater(new Runnable() {
+    	  
          @Override
          public void run() {
             new TTTGraphics2P(); // Let the constructor do the job
